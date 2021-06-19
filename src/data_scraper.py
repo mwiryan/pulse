@@ -60,7 +60,8 @@ class PULSE:
         files = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(self.data_store)) for f in fn]
         matches = [file for file in files if re.search(fr'{survey_round}', file)]
         if matches:
-            print(f'Round {survey_round} of the survey has already been collected and is available at {self.data_store}.\n')
+            print(
+                f'Round {survey_round} of the survey has already been collected and is available at {self.data_store}.\n')
         else:
             url = pulse.links[survey_round]
             file_name = re.sub(r'.*HPS_', '', url)
@@ -117,13 +118,8 @@ class PULSE:
         """
         pass
 
+
 if __name__ == "__main__":
     pulse = PULSE()
     pulse.download(survey_round=25)
-
-    df = pd.read_csv(os.path.join(pulse.data_store, 'raw', os.listdir(r'../data/raw')[0]))
-    df.head()
-
-
-
 
